@@ -89,3 +89,17 @@ CREATE VIEW employee_summary AS
     INNER JOIN role AS r ON e.role_id = r.id
     INNER JOIN department AS d ON d.id = r.department_id
     LEFT OUTER JOIN employee AS m ON e.manager_id = m.id
+;
+
+CREATE
+  USER 'bryan3023.employee_tracker'@'localhost'
+  IDENTIFIED BY '1L5i%KV&^@jc7LFe5c5C'
+;
+
+GRANT
+  SELECT, UPDATE, INSERT, DELETE
+ON
+  employee_tracker_DB . *
+TO
+  'bryan3023.employee_tracker'@'localhost'
+;
