@@ -85,7 +85,7 @@ CREATE TABLE employee (
 
 -- Create views --
 
-CREATE VIEW v_employee_full AS
+CREATE VIEW v_employees_full AS
   SELECT
     e.id AS ID,
     e.given_name AS 'Given Name',
@@ -99,6 +99,17 @@ CREATE VIEW v_employee_full AS
     INNER JOIN role AS r ON e.role_id = r.id
     INNER JOIN department AS d ON d.id = r.department_id
     LEFT OUTER JOIN employee AS m ON e.manager_id = m.id
+;
+
+CREATE VIEW v_salaries_by_department AS
+  SELECT
+    d.name AS Department,
+    SUM(r.salary) AS 'Salaries Total'
+  FROM
+    department AS d
+    INNER JOIN role AS r ON r.department_id = d.id
+  GROUP BY
+    d.name
 ;
 
 
