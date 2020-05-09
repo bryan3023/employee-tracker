@@ -86,6 +86,6 @@ CREATE VIEW employee_summary AS
     CONCAT(m.given_name, ' ', m.surname) AS Manager
   FROM
     employee AS e
-    INNER JOIN role AS r ON e.id = r.id
-    INNER JOIN department AS d ON d.id = r.id
+    INNER JOIN role AS r ON e.role_id = r.id
+    INNER JOIN department AS d ON d.id = r.department_id
     LEFT OUTER JOIN employee AS m ON e.manager_id = m.id

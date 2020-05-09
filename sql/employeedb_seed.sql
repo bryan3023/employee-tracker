@@ -71,5 +71,8 @@ SET
 WHERE
   surname = 'Allen';
 
-select * from employee_summary;
+
+select * from department;
+select * from role;
 select * from employee;
+select * from employee_summary;
