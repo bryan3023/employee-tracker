@@ -1,8 +1,16 @@
+--
+--  Create Employee Tracker Database
+--
+--  Create database and user account for running the application.
+--
+
 DROP DATABASE IF EXISTS employee_tracker_DB;
 CREATE DATABASE employee_tracker_DB;
 
 USE employee_tracker_DB;
 
+
+-- Create tables --
 
 CREATE TABLE department (
   id
@@ -75,7 +83,9 @@ CREATE TABLE employee (
 );
 
 
-CREATE VIEW employee_summary AS
+-- Create views --
+
+CREATE VIEW v_employee_full AS
   SELECT
     e.id AS ID,
     e.given_name AS 'Given Name',
@@ -90,6 +100,9 @@ CREATE VIEW employee_summary AS
     INNER JOIN department AS d ON d.id = r.department_id
     LEFT OUTER JOIN employee AS m ON e.manager_id = m.id
 ;
+
+
+-- Create account for connecting via Node.js --
 
 CREATE
   USER 'bryan3023.employee_tracker'@'localhost'

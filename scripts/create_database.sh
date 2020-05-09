@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Create database artificats and seed the starter data.
+# Create database artifacts and seed the starter data.
 #
 
 function run_myssql_script() {

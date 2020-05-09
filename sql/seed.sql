@@ -1,5 +1,5 @@
 --
--- Seed Employee Tracker database
+--  Seed Employee Tracker Database
 --
 --  Populate the database with all of the values shown in the instructions
 --  to give us something to work with straight away.
