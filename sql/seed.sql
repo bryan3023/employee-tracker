@@ -47,7 +47,7 @@ SELECT @salespersonID := id FROM role WHERE title = 'Salesperson';
 SELECT @leadEngineeerID := id FROM role WHERE title = 'Lead Engineer';
 SELECT @softwareEngineerID := id FROM role WHERE title = 'Software Engineer';
 SELECT @accountantID := id FROM role WHERE title = 'Accountant';
-SELECT @LegalTeamLeadID := id FROM role WHERE title = 'Legal Team Lead';
+SELECT @legalTeamLeadID := id FROM role WHERE title = 'Legal Team Lead';
 SELECT @lawyerID := id FROM role WHERE title = 'Lawyer';
 
 INSERT INTO employee
@@ -58,7 +58,7 @@ VALUES
   ('Ashley', 'Rodriguez', @leadEngineeerID),
   ('Kevin', 'Tupik', @softwareEngineerID),
   ('Malia', 'Brown', @accountantID),
-  ('Sarah', 'Lourd', @LegalTeamLeadID),
+  ('Sarah', 'Lourd', @legalTeamLeadID),
   ('Tom', 'Allen', @lawyerID)
 ;
 

@@ -85,7 +85,30 @@ CREATE TABLE employee (
 
 -- Create views --
 
-CREATE VIEW v_employees_full AS
+CREATE VIEW v_departments AS
+  -- This isn't strictly necessary, but ensures column names are
+  -- capitalized in the UI.
+  SELECT
+    ID,
+    Name
+  FROM
+    department
+;
+
+
+CREATE VIEW v_roles AS
+  SELECT
+    r.id AS ID,
+    r.title AS Title,
+    r.salary AS Salary,
+    d.name AS Department
+  FROM
+    role AS r
+    INNER JOIN department AS d ON r.department_id = d.id
+;
+
+
+CREATE VIEW v_employees AS
   SELECT
     e.id AS ID,
     e.given_name AS 'Given Name',
@@ -93,13 +116,17 @@ CREATE VIEW v_employees_full AS
     r.title AS Title,
     d.name AS Department,
     r.salary AS Salary,
-    CONCAT(m.given_name, ' ', m.surname) AS Manager
+    COALESCE(
+      CONCAT(m.given_name, ' ', m.surname),
+      '(none)')
+      AS Manager
   FROM
     employee AS e
     INNER JOIN role AS r ON e.role_id = r.id
     INNER JOIN department AS d ON d.id = r.department_id
     LEFT OUTER JOIN employee AS m ON e.manager_id = m.id
 ;
+
 
 CREATE VIEW v_salaries_by_department AS
   SELECT
