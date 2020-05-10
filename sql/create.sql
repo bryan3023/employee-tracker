@@ -130,7 +130,7 @@ CREATE VIEW v_employees AS
 ;
 
 
-CREATE VIEW v_department_unused AS
+CREATE VIEW v_departments_unused AS
   -- Departments with no roles in them.
   SELECT
     d.name AS Department
