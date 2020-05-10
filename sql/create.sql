@@ -157,12 +157,13 @@ CREATE VIEW v_roles_unused AS
     COUNT(e.role_id) = 0
 ;
 
+
 CREATE VIEW v_employees_nonmanagers AS
   -- Employees who are not managers
   SELECT
     *
   FROM
-    v_employees AS nonmanager
+    employee AS nonmanager
   WHERE
     NOT EXISTS (
       SELECT TRUE FROM employee WHERE manager_id = nonmanager.id
