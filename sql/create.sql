@@ -157,6 +157,18 @@ CREATE VIEW v_roles_unused AS
     COUNT(e.role_id) = 0
 ;
 
+CREATE VIEW v_employees_nonmanagers AS
+  -- Employees who are not managers
+  SELECT
+    *
+  FROM
+    v_employees AS nonmanager
+  WHERE
+    NOT EXISTS (
+      SELECT TRUE FROM employee WHERE manager_id = nonmanager.id
+    )
+;
+
 
 CREATE VIEW v_salaries_by_department AS
   -- Total spent on salaries for each department.
