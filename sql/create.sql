@@ -44,7 +44,7 @@ CREATE TABLE role (
     INT
     NOT NULL,
 
-  CONSTRAINT FK_department
+  CONSTRAINT FK_role_department
     FOREIGN KEY (department_id)
     REFERENCES department(id)
 );
@@ -73,11 +73,11 @@ CREATE TABLE employee (
     INT
     NULL,
 
-  CONSTRAINT FK_role
+  CONSTRAINT FK_employee_role
     FOREIGN KEY (role_id)
     REFERENCES role(id),
 
-  CONSTRAINT FK_manager
+  CONSTRAINT FK_employee_manager
     FOREIGN KEY (manager_id)
     REFERENCES employee(id)
 );
@@ -86,8 +86,8 @@ CREATE TABLE employee (
 -- Create views --
 
 CREATE VIEW v_departments AS
-  -- This isn't strictly necessary, but ensures column names are
-  -- capitalized in the UI.
+  -- All departments. This isn't strictly necessary, but ensures column
+  -- names are capitalized in the UI.
   SELECT
     ID,
     Name
@@ -97,6 +97,7 @@ CREATE VIEW v_departments AS
 
 
 CREATE VIEW v_roles AS
+  -- All roles.
   SELECT
     r.id AS ID,
     r.title AS Title,
@@ -109,6 +110,7 @@ CREATE VIEW v_roles AS
 
 
 CREATE VIEW v_employees AS
+  -- All employees.
   SELECT
     e.id AS ID,
     e.given_name AS 'Given Name',
@@ -128,15 +130,43 @@ CREATE VIEW v_employees AS
 ;
 
 
-CREATE VIEW v_salaries_by_department AS
+CREATE VIEW v_department_unused AS
+  -- Departments with no roles in them.
   SELECT
-    d.name AS Department,
-    SUM(r.salary) AS 'Salaries Total'
+    d.name AS Department
   FROM
     department AS d
-    INNER JOIN role AS r ON r.department_id = d.id
+    LEFT OUTER JOIN role AS r ON d.id = r.department_id
   GROUP BY
     d.name
+  HAVING
+    COUNT(r.department_id) = 0
+;
+
+
+CREATE VIEW v_roles_unused AS
+  -- Roles with no employees in them.
+  SELECT
+    r.title AS Title
+  FROM
+    role AS r
+    LEFT OUTER JOIN employee AS e ON r.id = e.role_id
+  GROUP BY
+    r.title
+  HAVING
+    COUNT(e.role_id) = 0
+;
+
+
+CREATE VIEW v_salaries_by_department AS
+  -- Total spent on salaries for each department.
+  SELECT
+    Department,
+    SUM(Salary) AS 'Salaries Total'
+  FROM
+    v_employees
+  GROUP BY
+    Department
 ;
 
 
