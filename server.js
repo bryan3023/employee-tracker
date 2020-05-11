@@ -19,7 +19,7 @@ function showSplash() {
   const logo = asciiArtLogo({
     name: "Employee Tracker",
     version: "COVID-19",
-    description: "They can't leave their homes - it's like fish in a barrel!"
+    description: "View and organize departments, roles, and employees in your organization."
   }).render()
 
   console.log(logo)

@@ -121,7 +121,8 @@ CREATE VIEW v_employees AS
     COALESCE(
       CONCAT(m.given_name, ' ', m.surname),
       '(none)')
-      AS Manager
+      AS Manager,
+    e.manager_id
   FROM
     employee AS e
     INNER JOIN role AS r ON e.role_id = r.id
@@ -133,12 +134,13 @@ CREATE VIEW v_employees AS
 CREATE VIEW v_departments_unused AS
   -- Departments with no roles in them.
   SELECT
+    d.id AS ID,
     d.name AS Department
   FROM
     department AS d
     LEFT OUTER JOIN role AS r ON d.id = r.department_id
   GROUP BY
-    d.name
+    d.id, d.name
   HAVING
     COUNT(r.department_id) = 0
 ;
@@ -147,12 +149,13 @@ CREATE VIEW v_departments_unused AS
 CREATE VIEW v_roles_unused AS
   -- Roles with no employees in them.
   SELECT
+    r.id AS ID,
     r.title AS Title
   FROM
     role AS r
     LEFT OUTER JOIN employee AS e ON r.id = e.role_id
   GROUP BY
-    r.title
+    r.id, r.title
   HAVING
     COUNT(e.role_id) = 0
 ;
@@ -195,33 +198,6 @@ CREATE VIEW v_salaries_by_department AS
     Department
 ;
 
-
--- Create stored procedures --
-
--- DELIMITER $$
-
--- CREATE PROCEDURE add_role (
---   IN title VARCHAR(30),
---   IN salary DECIMAL(8,2),
---   IN department_name VARCHAR(30)
--- )
--- BEGIN
---   SELECT
---     @department_id := id
---   FROM
---     department
---   WHERE
---     name = department_name
---   ;
---   INSERT INTO role
---     (title, salary, department_id)
---   VALUES
---     (title, salary, @department_id)
---   ;
--- END $$
-
-
--- DELIMITER ;
 
 -- Create account for connecting via Node.js --
 
