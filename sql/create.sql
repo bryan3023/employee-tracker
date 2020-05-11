@@ -158,6 +158,19 @@ CREATE VIEW v_roles_unused AS
 ;
 
 
+CREATE VIEW v_employees_managers AS
+  -- Employees who are managers
+  SELECT
+    *
+  FROM
+    employee AS manager
+  WHERE
+    EXISTS (
+      SELECT TRUE FROM employee WHERE manager_id = manager.id
+    )
+;
+
+
 CREATE VIEW v_employees_nonmanagers AS
   -- Employees who are not managers
   SELECT
@@ -182,6 +195,33 @@ CREATE VIEW v_salaries_by_department AS
     Department
 ;
 
+
+-- Create stored procedures --
+
+-- DELIMITER $$
+
+-- CREATE PROCEDURE add_role (
+--   IN title VARCHAR(30),
+--   IN salary DECIMAL(8,2),
+--   IN department_name VARCHAR(30)
+-- )
+-- BEGIN
+--   SELECT
+--     @department_id := id
+--   FROM
+--     department
+--   WHERE
+--     name = department_name
+--   ;
+--   INSERT INTO role
+--     (title, salary, department_id)
+--   VALUES
+--     (title, salary, @department_id)
+--   ;
+-- END $$
+
+
+-- DELIMITER ;
 
 -- Create account for connecting via Node.js --
 
