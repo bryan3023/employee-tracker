@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "create-db-mac": "chmod +x ./scripts/create_database.sh > /dev/null ; ./scripts/create_database.sh",
-    "remove-db-mac": "chmod +x ./scripts/remove_database.sh > /dev/null ; ./scripts/remove_database.sh",
-    "reset-db-mac": "chmod +x ./scripts/reset_database.sh > /dev/null ; ./scripts/reset_database.sh"
+    "create-db-mac": "chmod +x ./scripts/create_database.sh ; ./scripts/create_database.sh",
+    "remove-db-mac": "chmod +x ./scripts/remove_database.sh ; ./scripts/remove_database.sh"
   },
   "repository": {
     "type": "git",

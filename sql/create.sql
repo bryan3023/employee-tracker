@@ -201,6 +201,8 @@ CREATE VIEW v_salaries_by_department AS
 
 -- Create account for connecting via Node.js --
 
+DROP USER IF EXISTS 'bryan3023.employee_tracker'@'localhost';
+
 CREATE
   USER 'bryan3023.employee_tracker'@'localhost'
   IDENTIFIED BY '1L5i%KV&^@jc7LFe5c5C'
