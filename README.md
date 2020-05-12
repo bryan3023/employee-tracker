@@ -20,7 +20,7 @@ Referential integrity will be protected. For example:
 
 * You cannot delete employees if they have at least one direct report.
 * You cannot delete roles if at least one employee is assigned to them.
-* You cannot delete departments if at least one role is assigned within it.
+* You cannot delete departments if at least one role is assigned within them.
 
 ## Installation
 
