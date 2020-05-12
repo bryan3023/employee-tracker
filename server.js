@@ -13,12 +13,11 @@ function init() {
 
 
 /*
-  Show a splash header. If you're going BBS, go big!
+  Show a splash header.
  */
 function showSplash() {
   const logo = asciiArtLogo({
     name: "Employee Tracker",
-    version: "COVID-19",
     description: "View and organize departments, roles, and employees in your organization."
   }).render()
 
