@@ -36,7 +36,7 @@ Next, you need to setup the database. If you're on a Mac, you can run:
 npm run create-db-mac
 ```
 
-You'll need to provide the root password for your local MySQL instance. This will not be saved and you can review the script under `script\create_database.sh`.
+You'll need to provide the root password for your local MySQL instance. This will not be saved and you can review the script under `scripts\create_database.sh`.
 
 I don't yet have the script setup for Windows, but you can run the SQL scripts manually via `sql\create.sql` and `sql\seed.sql`.
 
